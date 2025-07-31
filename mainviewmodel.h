@@ -18,6 +18,9 @@ public:
     // Editable functionality:
     bool setData(const QModelIndex &index, const QVariant &value, int role = Qt::EditRole) override;
 
+    // Edit row
+    Q_INVOKABLE void setDataAt(int row, const QString& value);
+
     Qt::ItemFlags flags(const QModelIndex& index) const override;
 
     // Add data:

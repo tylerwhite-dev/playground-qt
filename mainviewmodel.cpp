@@ -1,4 +1,5 @@
 #include "mainviewmodel.h"
+#include <QDebug>
 
 MyListModel::MyListModel(QObject *parent)
     : QAbstractListModel(parent)
@@ -25,13 +26,27 @@ QVariant MyListModel::data(const QModelIndex &index, int role) const
     return QVariant();
 }
 
+Q_INVOKABLE void MyListModel::setDataAt(int row, const QString& value) {
+    QModelIndex index = this->index(row, 0);
+    if (index.isValid()) {
+        setData(index, value, Qt::EditRole);
+    }
+}
+
 bool MyListModel::setData(const QModelIndex &index, const QVariant &value, int role)
 {
-    if (!index.isValid() || role != Qt::EditRole)
+    if (!index.isValid() || role != Qt::EditRole) {
+        qDebug() << "invalid index";
         return false;
+    }
+
+    beginResetModel();
 
     m_data[index.row()] = value.toString();
     emit dataChanged(index, index, {role});
+
+    endResetModel();
+
     return true;
 }
 

@@ -26,6 +26,21 @@ Window {
 
             spacing: 10
 
+            Rectangle {
+                Layout.alignment: Qt.AlignCenter
+
+                width: 150
+                height: 100
+                color: "red"
+            }
+
+            Button {
+                Layout.alignment: Qt.AlignCenter
+
+                text: "Click Me"
+                Layout.fillWidth: true
+            }
+
             Text {
                 Layout.alignment: Qt.AlignCenter
 
@@ -43,21 +58,6 @@ Window {
                 delegate: Text {
                     text: model.display
                 }
-            }
-
-            Rectangle {
-                Layout.alignment: Qt.AlignCenter
-
-                width: 150
-                height: 100
-                color: "blue"
-            }
-
-            Button {
-                Layout.alignment: Qt.AlignCenter
-
-                text: "Click Me"
-                Layout.fillWidth: true
             }
         }
 
@@ -98,6 +98,10 @@ Window {
 
                 text: "Click Me"
                 Layout.fillWidth: true
+
+                onClicked: {
+                    myModel.setDataAt(7, "ASDF")
+                }
             }
         }
     }
